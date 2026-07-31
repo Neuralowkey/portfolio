@@ -202,25 +202,28 @@
           </article>
 
           <!-- 3 -->
-          <article class="card accent-3 soon">
+          <article class="card accent-3">
             <div class="card-top">
               <h2>Yeshiva Operating System</h2>
-              <span class="tag tag-live">In progress</span>
-              <span class="tag">Next.js · Prisma</span>
+              <span class="tag tag-live">Live</span>
+              <span class="tag">Next.js 16</span>
             </div>
             <p>
-              The back office of a school as one system: recruiting and donor pipelines, student
-              records, donations, tasks — and an approval queue where every action an AI agent
-              proposes waits for a human to accept or reject it.
+              The back office of a school as one system: recruiting, donor and alumni pipelines
+              on a single contact record, student records, giving history, tasks — and an
+              approval queue where every action an AI agent proposes waits for a human to accept
+              or reject it.
             </p>
             <p class="basis">Based on a CRM I built for a yeshiva.</p>
             <ul class="points">
-              <li>Human-in-the-loop by construction: agents propose, people decide, and every decision leaves a record</li>
-              <li>Multi-pipeline contact management with Hebrew-calendar milestone tracking</li>
+              <li>Agents propose, people decide: approving a stage move is the thing that moves the contact, and every decision appends to an audit trail</li>
+              <li>No confidence threshold above which an agent proceeds alone — the queue reports "auto-executed: 0" as a design fact, not a metric</li>
+              <li>Rejections capture a reason, because that is the signal the next agent run actually needs</li>
             </ul>
-            <p class="stack">Next.js 16 · React 19 · TypeScript · Prisma · Tailwind 4</p>
+            <p class="stack">Next.js 16 · React 19 · TypeScript · Tailwind 4 · zustand</p>
             <div class="actions">
-              <a class="btn btn-ghost" href="https://github.com/Neuralowkey">Coming shortly</a>
+              <a class="btn btn-primary" href="https://demo-yeshiva-os.vercel.app">Open the demo →</a>
+              <a class="btn btn-ghost" href="https://github.com/Neuralowkey/demo-yeshiva-os">Source</a>
             </div>
           </article>
         </div>
