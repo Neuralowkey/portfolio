@@ -210,15 +210,16 @@
             </div>
             <p>
               The back office of a school as one system: recruiting, donor and alumni pipelines
-              on a single contact record, student records, giving history, tasks — and an
-              approval queue where every action an AI agent proposes waits for a human to accept
-              or reject it.
+              on a single contact record, students, seder attendance, giving history, a general
+              ledger synced from QuickBooks — and an approval queue where every action an AI
+              agent proposes waits for a human to accept or reject it.
             </p>
             <p class="basis">Based on a CRM I built for a yeshiva.</p>
             <ul class="points">
               <li>Agents propose, people decide: approving a stage move is the thing that moves the contact, and every decision appends to an audit trail</li>
               <li>No confidence threshold above which an agent proceeds alone — the queue reports "auto-executed: 0" as a design fact, not a metric</li>
-              <li>Rejections capture a reason, because that is the signal the next agent run actually needs</li>
+              <li>The QuickBooks matcher refuses to guess: when it can't tell which gift a deposit belongs to it says why and hands the decision over</li>
+              <li>Mirrored accounts are excluded from the ledger totals, because counting both sides would double every dollar raised</li>
             </ul>
             <p class="stack">Next.js 16 · React 19 · TypeScript · Tailwind 4 · zustand</p>
             <div class="actions">
