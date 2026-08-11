@@ -118,10 +118,18 @@
       footer a { color: var(--dim); }
 
       @media (min-width: 720px) { .cards { gap: 22px; } }
+
+      /* ב״ה — quiet mark, top-right on every page */
+      .bh {
+        position: fixed; top: 10px; right: 14px; z-index: 10;
+        font-size: 13px; color: var(--faint);
+        pointer-events: none; user-select: none;
+      }
     </style>
   </head>
 
   <body>
+    <span class="bh" lang="he">ב״ה</span>
     <div class="wrap">
       <header>
         <p class="kicker">Colin Olivier</p>
