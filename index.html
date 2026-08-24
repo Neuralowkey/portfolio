@@ -10,114 +10,271 @@
     />
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>◆</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      /* ── Tokens ──────────────────────────────────────────────────────────
+         One dark surface ladder (bg → panel → panel-2), hairline edges, and
+         three accents — one per demo. Cards pick theirs via --card-accent so
+         every accent-dependent rule is written once. */
       :root {
-        --bg: #08090c;
-        --panel: #101319;
-        --panel-2: #161b23;
-        --edge: #232a36;
-        --edge-2: #333d4e;
+        --bg: #07080d;
+        --panel: #0e1118;
+        --panel-2: #141926;
+        --edge: #1f2533;
+        --edge-2: #2d3648;
         --ink: #eef2f8;
-        --dim: #97a3b6;
-        --faint: #626e80;
-        --accent: #6ee7ff;
-        --ember: #ff8a3d;
-        --olive: #b7c47a;
+        --dim: #9aa5b8;
+        --faint: #5f6b80;
+        --accent: #6ee7ff;   /* LeadGraph cyan */
+        --ember: #ff8a3d;    /* Olive & Ember */
+        --olive: #b7c47a;    /* Yeshiva OS */
+        --violet: #a07cff;   /* data-encoding companion, motifs only */
+        --display: "Fraunces", Georgia, "Times New Roman", serif;
+        --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
       }
+
       * { box-sizing: border-box; }
-      html { -webkit-text-size-adjust: 100%; }
+      html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
       body {
         margin: 0;
         background: var(--bg);
         color: var(--ink);
-        font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font: 400 16px/1.6 var(--sans);
         -webkit-font-smoothing: antialiased;
       }
       a { color: inherit; }
-      .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+      ::selection { background: rgba(110, 231, 255, 0.28); }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
-      header { padding: 88px 0 56px; border-bottom: 1px solid var(--edge); }
+      /* ── Atmosphere ──────────────────────────────────────────────────────
+         Two faint radial washes (cyan high, ember low) and a dot grid that
+         fades out below the fold. Fixed, non-interactive, cheap to paint. */
+      .atmosphere {
+        position: fixed; inset: 0; z-index: -1; pointer-events: none;
+        background:
+          radial-gradient(900px 540px at 82% -12%, rgba(110, 231, 255, 0.075), transparent 62%),
+          radial-gradient(820px 560px at -8% 108%, rgba(255, 138, 61, 0.055), transparent 58%);
+      }
+      .atmosphere::after {
+        content: ""; position: absolute; inset: 0;
+        background-image: radial-gradient(circle at 1px 1px, rgba(238, 242, 248, 0.05) 1px, transparent 0);
+        background-size: 26px 26px;
+        mask-image: radial-gradient(720px 480px at 62% 0%, black, transparent 78%);
+        -webkit-mask-image: radial-gradient(720px 480px at 62% 0%, black, transparent 78%);
+      }
+
+      .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+
+      /* ── Header ───────────────────────────────────────────────────────── */
+      header { padding: 96px 0 60px; }
       .kicker {
-        font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-        color: var(--accent); margin: 0 0 20px;
+        display: flex; align-items: center; gap: 12px;
+        font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+        color: var(--accent); margin: 0 0 26px;
       }
+      .kicker::after { content: ""; height: 1px; width: 56px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0.6; }
       h1 {
-        font-size: clamp(34px, 6vw, 56px); line-height: 1.05;
-        letter-spacing: -0.02em; margin: 0 0 22px; font-weight: 650;
+        font-family: var(--display);
+        font-size: clamp(40px, 6.6vw, 68px);
+        font-weight: 480;
+        line-height: 1.04;
+        letter-spacing: -0.015em;
+        margin: 0 0 26px;
+        max-width: 15em;
+        text-wrap: balance;
       }
-      .lede { font-size: clamp(17px, 2.2vw, 20px); color: var(--dim); max-width: 40em; margin: 0; }
+      h1 em { font-style: italic; font-weight: 440; color: var(--accent); }
+      .lede {
+        font-size: clamp(17px, 2.2vw, 19px); color: var(--dim);
+        max-width: 42em; margin: 0; text-wrap: pretty;
+      }
       .lede strong { color: var(--ink); font-weight: 600; }
 
-      .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+      .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
       .meta a {
+        display: inline-flex; align-items: center; gap: 8px;
         font-size: 14px; text-decoration: none; color: var(--dim);
-        border: 1px solid var(--edge-2); border-radius: 999px; padding: 8px 16px;
-        transition: border-color .15s, color .15s;
+        border: 1px solid var(--edge-2); border-radius: 999px; padding: 9px 18px;
+        background: color-mix(in srgb, var(--panel) 55%, transparent);
+        transition: border-color 0.2s, color 0.2s, background 0.2s;
       }
-      .meta a:hover { color: var(--ink); border-color: var(--faint); }
+      .meta a:hover { color: var(--ink); border-color: var(--faint); background: var(--panel); }
+      .meta svg { width: 15px; height: 15px; fill: currentColor; opacity: 0.85; }
 
-      main { padding: 56px 0 24px; }
+      /* ── Section intro ────────────────────────────────────────────────── */
+      main { padding: 28px 0 24px; }
+      .section-head { display: flex; align-items: baseline; gap: 16px; border-top: 1px solid var(--edge); padding-top: 40px; }
       .section-label {
-        font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-        color: var(--faint); margin: 0 0 8px;
+        font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+        color: var(--faint); margin: 0; white-space: nowrap;
       }
-      .section-note { color: var(--dim); margin: 0 0 36px; max-width: 46em; font-size: 15px; }
+      .section-note { color: var(--dim); margin: 10px 0 40px; max-width: 46em; font-size: 15px; }
 
-      .cards { display: grid; gap: 20px; }
+      /* ── Cards ────────────────────────────────────────────────────────── */
+      .cards { display: grid; gap: 26px; }
 
       .card {
-        border: 1px solid var(--edge); border-radius: 16px; background: var(--panel);
-        padding: 28px; transition: border-color .15s, background .15s;
+        --card-accent: var(--accent);
+        position: relative;
+        display: grid; gap: 30px;
+        border: 1px solid var(--edge); border-radius: 20px;
+        background: linear-gradient(180deg, var(--panel), color-mix(in srgb, var(--panel) 55%, var(--bg)));
+        padding: 32px 28px;
+        overflow: hidden;
+        transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
       }
-      .card:hover { border-color: var(--edge-2); background: var(--panel-2); }
+      /* Accent hairline across the top of each card. */
+      .card::before {
+        content: ""; position: absolute; inset: 0 0 auto 0; height: 1px;
+        background: linear-gradient(90deg, transparent 4%, color-mix(in srgb, var(--card-accent) 55%, transparent) 38%, transparent 92%);
+      }
+      .card:hover {
+        transform: translateY(-3px);
+        border-color: color-mix(in srgb, var(--card-accent) 35%, var(--edge));
+        box-shadow: 0 28px 70px -34px color-mix(in srgb, var(--card-accent) 32%, transparent);
+      }
+      @media (min-width: 920px) {
+        .card { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); padding: 38px 40px; align-items: center; }
+      }
 
-      .card-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
-      .card h2 { font-size: 22px; margin: 0; letter-spacing: -0.01em; font-weight: 620; }
+      .accent-1 { --card-accent: var(--ember); }
+      .accent-2 { --card-accent: var(--accent); }
+      .accent-3 { --card-accent: var(--olive); }
+
+      .card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+      .num { font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: 0.08em; }
+      .card h2 {
+        flex-basis: 100%;
+        font-family: var(--display);
+        font-size: clamp(24px, 3vw, 30px); font-weight: 520; letter-spacing: -0.01em;
+        line-height: 1.15; margin: 2px 0 0;
+      }
       .tag {
-        font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
         border: 1px solid var(--edge-2); border-radius: 999px; padding: 3px 10px; color: var(--faint);
       }
-      .card p { color: var(--dim); margin: 14px 0 0; font-size: 15px; }
+      .tag-live {
+        color: var(--card-accent);
+        border-color: color-mix(in srgb, var(--card-accent) 55%, transparent);
+        background: color-mix(in srgb, var(--card-accent) 9%, transparent);
+      }
+      .card p { color: var(--dim); margin: 16px 0 0; font-size: 15px; text-wrap: pretty; }
       .card .basis { color: var(--faint); font-size: 14px; margin-top: 10px; }
 
-      ul.points { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
-      ul.points li { color: var(--dim); font-size: 14.5px; padding-left: 18px; position: relative; }
+      ul.points { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+      ul.points li { color: var(--dim); font-size: 14.5px; padding-left: 20px; position: relative; text-wrap: pretty; }
       ul.points li::before {
-        content: "→"; position: absolute; left: 0; color: var(--faint);
+        content: "→"; position: absolute; left: 0;
+        color: color-mix(in srgb, var(--card-accent) 70%, var(--faint));
       }
 
-      .stack { margin-top: 18px; font-size: 13px; color: var(--faint); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .stack { margin-top: 18px; font-size: 12.5px; color: var(--faint); font-family: var(--mono); letter-spacing: 0.01em; }
 
-      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
       .btn {
+        display: inline-flex; align-items: center; gap: 8px;
         text-decoration: none; font-size: 14.5px; font-weight: 600; border-radius: 999px;
-        padding: 11px 22px; transition: opacity .15s, border-color .15s, color .15s;
+        padding: 11px 22px;
+        transition: filter 0.2s, border-color 0.2s, color 0.2s, background 0.2s;
       }
-      .btn-primary { background: var(--accent); color: #071018; }
-      .btn-primary:hover { opacity: .87; }
+      .btn .arr { transition: transform 0.2s; }
+      .btn:hover .arr { transform: translateX(3px); }
+      .btn-primary { background: var(--card-accent); color: #0b0d12; }
+      .btn-primary:hover { filter: brightness(1.12); }
       .btn-ghost { border: 1px solid var(--edge-2); color: var(--dim); }
       .btn-ghost:hover { color: var(--ink); border-color: var(--faint); }
 
-      .accent-1 .btn-primary { background: var(--ember); color: #14100c; }
-      .accent-1 .tag-live { color: var(--ember); border-color: var(--ember); }
-      .accent-2 .tag-live { color: var(--accent); border-color: var(--accent); }
-      .accent-3 .btn-primary { background: var(--olive); color: #10130a; }
-      .accent-3 .tag-live { color: var(--olive); border-color: var(--olive); }
+      /* ── Card visuals ─────────────────────────────────────────────────────
+         Each demo gets a small drawn motif instead of a screenshot: the demo
+         itself is one click away, so the card's job is atmosphere, not proof. */
+      .visual {
+        position: relative; border: 1px solid var(--edge); border-radius: 14px;
+        background:
+          radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--card-accent) 7%, transparent), transparent 70%),
+          var(--bg);
+        overflow: hidden;
+        min-height: 210px;
+      }
+      .visual svg { display: block; width: 100%; height: 100%; min-height: 210px; }
 
+      /* LeadGraph — a small co-authorship network with one warm-intro path. */
+      .lg-edge { stroke: rgba(110, 231, 255, 0.16); stroke-width: 1; }
+      .lg-path {
+        fill: none; stroke: #3df2b6; stroke-width: 1.5;
+        stroke-dasharray: 5 8; stroke-linecap: round; opacity: 0.9;
+        animation: dashflow 5s linear infinite;
+      }
+      @keyframes dashflow { to { stroke-dashoffset: -26; } }
+      .lg-hot { animation: hotpulse 3.2s ease-in-out infinite; }
+      @keyframes hotpulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+      /* Olive & Ember — the brand ampersand over a bed of coals, sparks rising. */
+      .oe-amp {
+        font-family: var(--display); font-style: italic; font-weight: 400;
+        fill: rgba(247, 242, 233, 0.14);
+      }
+      .spark { fill: var(--ember); animation: sparkrise 4.2s ease-in infinite; }
+      .spark.s2 { animation-delay: 1.1s; fill: #ffb265; }
+      .spark.s3 { animation-delay: 2.3s; }
+      .spark.s4 { animation-delay: 3.1s; fill: #ffb265; }
+      @keyframes sparkrise {
+        0% { transform: translateY(0); opacity: 0; }
+        12% { opacity: 0.9; }
+        70% { opacity: 0.35; }
+        100% { transform: translateY(-92px); opacity: 0; }
+      }
+
+      /* Yeshiva OS — an approval row getting its human decision. */
+      .yo-row { fill: var(--panel-2); stroke: var(--edge); }
+      .yo-row-active { stroke: color-mix(in srgb, var(--olive) 45%, var(--edge)); }
+      .yo-line { fill: rgba(238, 242, 248, 0.09); }
+      .yo-check {
+        fill: none; stroke: var(--olive); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+        stroke-dasharray: 26; stroke-dashoffset: 26;
+        animation: checkdraw 5.2s ease-out infinite;
+      }
+      @keyframes checkdraw {
+        0%, 18% { stroke-dashoffset: 26; }
+        38%, 82% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: 0; opacity: 0; }
+      }
+
+      /* ── Note + footer ────────────────────────────────────────────────── */
       .note {
-        margin: 44px 0 0; padding: 22px 24px; border: 1px solid var(--edge);
-        border-left: 2px solid var(--accent); border-radius: 12px;
-        background: var(--panel); color: var(--dim); font-size: 14.5px;
+        margin: 44px 0 0; padding: 24px 26px; border: 1px solid var(--edge);
+        border-radius: 14px; background: var(--panel);
+        color: var(--dim); font-size: 14.5px; position: relative; overflow: hidden;
+      }
+      .note::before {
+        content: ""; position: absolute; inset: 0 auto 0 0; width: 2px;
+        background: linear-gradient(180deg, var(--accent), transparent 90%);
       }
       .note strong { color: var(--ink); }
 
       footer {
-        margin-top: 64px; border-top: 1px solid var(--edge);
-        padding: 28px 0 72px; color: var(--faint); font-size: 14px;
+        margin-top: 72px; border-top: 1px solid var(--edge);
+        padding: 30px 0 80px; color: var(--faint); font-size: 14px;
       }
-      footer a { color: var(--dim); }
+      footer a { color: var(--dim); text-underline-offset: 3px; }
+      footer a:hover { color: var(--ink); }
 
-      @media (min-width: 720px) { .cards { gap: 22px; } }
+      /* ── Reveal on scroll (added by JS; content is fully visible without it) ── */
+      .will-reveal { opacity: 0; transform: translateY(16px); }
+      .will-reveal.revealed {
+        opacity: 1; transform: none;
+        transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation: none !important; transition: none !important; }
+      }
 
       /* ב״ה — quiet mark, top-right on every page */
       .bh {
@@ -130,111 +287,225 @@
 
   <body>
     <span class="bh" lang="he">ב״ה</span>
+    <div class="atmosphere" aria-hidden="true"></div>
+
     <div class="wrap">
       <header>
         <p class="kicker">Colin Olivier</p>
-        <h1>Three systems, running, that you can click through right now.</h1>
+        <h1>Three systems, <em>running</em>, that you can click through right now.</h1>
         <p class="lede">
           I design systems, specify them tightly, and direct AI coding agents to build them — then
           review and stress-test what they ship. These are demos of three I built for real
           clients, rebuilt with <strong>invented data</strong> so you can look around without
           anyone's information being involved.
         </p>
-        <nav class="meta">
-          <a href="https://github.com/Neuralowkey">GitHub</a>
-          <a href="https://www.linkedin.com/in/colinolivier">LinkedIn</a>
-          <a href="mailto:colindolivier@gmail.com">colindolivier@gmail.com</a>
+        <nav class="meta" aria-label="Contact links">
+          <a href="https://github.com/Neuralowkey">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.5 7.5 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/colinolivier">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.63 13.63h-2.37V9.92c0-.89-.02-2.02-1.23-2.02-1.24 0-1.43.96-1.43 1.96v3.77H6.23V6h2.28v1.04h.03c.32-.6 1.09-1.23 2.25-1.23 2.4 0 2.85 1.58 2.85 3.64v4.18ZM3.56 4.95a1.38 1.38 0 1 1 0-2.75 1.38 1.38 0 0 1 0 2.75ZM4.75 13.63H2.37V6h2.38v7.63ZM14.82 0H1.18C.53 0 0 .52 0 1.16v13.68C0 15.48.53 16 1.18 16h13.63c.65 0 1.19-.52 1.19-1.16V1.16C16 .52 15.46 0 14.81 0Z"/></svg>
+            LinkedIn
+          </a>
+          <a href="mailto:colindolivier@gmail.com">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M.05 3.56A1.5 1.5 0 0 1 1.5 2.5h13a1.5 1.5 0 0 1 1.45 1.06L8 8.62.05 3.56ZM0 4.7v7.05L4.71 8.7 0 4.7Zm5.68 4.61L.34 12.9a1.5 1.5 0 0 0 1.16.6h13a1.5 1.5 0 0 0 1.16-.6l-5.34-3.59L8 10.38l-2.32-1.07ZM11.29 8.7 16 11.75V4.7l-4.71 4Z"/></svg>
+            colindolivier@gmail.com
+          </a>
         </nav>
       </header>
 
       <main>
-        <p class="section-label">The demos</p>
+        <div class="section-head">
+          <p class="section-label">The demos</p>
+        </div>
         <p class="section-note">
           No signup, no install, nothing to configure. Each one opens straight into the product
           and carries a banner explaining exactly what is real and what is stubbed.
         </p>
 
         <div class="cards">
-          <!-- 1 -->
-          <article class="card accent-1">
-            <div class="card-top">
-              <h2>Restaurant ordering &amp; delivery</h2>
-              <span class="tag tag-live">Live</span>
-              <span class="tag">Next.js 16</span>
+          <!-- 1 · Olive & Ember -->
+          <article class="card accent-1" data-reveal>
+            <div>
+              <div class="card-top">
+                <span class="num">01</span>
+                <span class="tag tag-live">Live</span>
+                <span class="tag">Next.js 16</span>
+                <h2>Restaurant ordering &amp; delivery</h2>
+              </div>
+              <p>
+                The whole path a customer and a kitchen actually walk: a bilingual menu with
+                per-item options, a cart, checkout with zone-priced delivery, a live order tracker,
+                and the board the staff works from behind the counter.
+              </p>
+              <p class="basis">Based on a system I built for an independent restaurant.</p>
+              <ul class="points">
+                <li>English/Hebrew from the data layer up — the layout mirrors to RTL, and the two string dictionaries are checked for parity at compile time</li>
+                <li>Shabbat and yom-tov closures computed from the Hebrew calendar, not a hardcoded weekly table</li>
+                <li>Money summed as integer agorot by one function shared across cart, checkout and order record</li>
+              </ul>
+              <p class="stack">Next.js 16 · React 19 · TypeScript · Tailwind 4 · zustand · vitest</p>
+              <div class="actions">
+                <a class="btn btn-primary" href="https://demo-restaurant-ordering.vercel.app">Open the demo <span class="arr">→</span></a>
+                <a class="btn btn-ghost" href="https://github.com/Neuralowkey/demo-restaurant-ordering">Source</a>
+              </div>
             </div>
-            <p>
-              The whole path a customer and a kitchen actually walk: a bilingual menu with
-              per-item options, a cart, checkout with zone-priced delivery, a live order tracker,
-              and the board the staff works from behind the counter.
-            </p>
-            <p class="basis">Based on a system I built for an independent restaurant.</p>
-            <ul class="points">
-              <li>English/Hebrew from the data layer up — the layout mirrors to RTL, and the two string dictionaries are checked for parity at compile time</li>
-              <li>Shabbat and yom-tov closures computed from the Hebrew calendar, not a hardcoded weekly table</li>
-              <li>Money summed as integer agorot by one function shared across cart, checkout and order record</li>
-            </ul>
-            <p class="stack">Next.js 16 · React 19 · TypeScript · Tailwind 4 · zustand · vitest</p>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://demo-restaurant-ordering.vercel.app">Open the demo →</a>
-              <a class="btn btn-ghost" href="https://github.com/Neuralowkey/demo-restaurant-ordering">Source</a>
-            </div>
-          </article>
-
-          <!-- 2 -->
-          <article class="card accent-2">
-            <div class="card-top">
-              <h2>LeadGraph — researcher lead intelligence</h2>
-              <span class="tag tag-live">Live</span>
-              <span class="tag">React · deck.gl</span>
-            </div>
-            <p>
-              Life-science vendors sell to scientists, and which scientists are worth calling is
-              written in the literature. LeadGraph turns publishing activity into ranked,
-              explainable, geo-mapped sales leads — with a weight tuner that re-ranks the whole
-              run live.
-            </p>
-            <p class="basis">My own product; a ground-up rewrite of a 23k-line Excel/VBA tool.</p>
-            <ul class="points">
-              <li>Every score decomposes into five named components, so a rep can disagree with a driver rather than the whole ranking</li>
-              <li>Communities, betweenness and PageRank computed in the browser over whichever edge set is displayed</li>
-              <li>Four distinct empty states — still running, still computing, genuinely empty, filtered out — that a careless build would conflate</li>
-            </ul>
-            <p class="stack">React 19 · TypeScript · deck.gl · three.js · graphology · TanStack Query</p>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://demo-leadgraph.vercel.app">Open the demo →</a>
-              <a class="btn btn-ghost" href="https://github.com/Neuralowkey/demo-leadgraph">Source</a>
+            <div class="visual" aria-hidden="true">
+              <svg viewBox="0 0 340 240" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <radialGradient id="emberBed" cx="50%" cy="100%" r="80%">
+                    <stop offset="0%" stop-color="#f2621d" stop-opacity="0.55" />
+                    <stop offset="45%" stop-color="#f2621d" stop-opacity="0.16" />
+                    <stop offset="100%" stop-color="#f2621d" stop-opacity="0" />
+                  </radialGradient>
+                </defs>
+                <text class="oe-amp" x="170" y="168" font-size="180" text-anchor="middle">&amp;</text>
+                <ellipse cx="170" cy="252" rx="185" ry="78" fill="url(#emberBed)" />
+                <g stroke="#2a2521" stroke-width="1.5">
+                  <line x1="52" y1="216" x2="288" y2="216" />
+                  <line x1="72" y1="226" x2="268" y2="226" />
+                </g>
+                <circle class="spark" cx="126" cy="212" r="2" />
+                <circle class="spark s2" cx="182" cy="216" r="1.6" />
+                <circle class="spark s3" cx="222" cy="210" r="2.2" />
+                <circle class="spark s4" cx="152" cy="218" r="1.4" />
+              </svg>
             </div>
           </article>
 
-          <!-- 3 -->
-          <article class="card accent-3">
-            <div class="card-top">
-              <h2>Yeshiva Operating System</h2>
-              <span class="tag tag-live">Live</span>
-              <span class="tag">Next.js 16</span>
+          <!-- 2 · LeadGraph -->
+          <article class="card accent-2" data-reveal>
+            <div>
+              <div class="card-top">
+                <span class="num">02</span>
+                <span class="tag tag-live">Live</span>
+                <span class="tag">React · deck.gl</span>
+                <h2>LeadGraph — researcher lead intelligence</h2>
+              </div>
+              <p>
+                Life-science vendors sell to scientists, and which scientists are worth calling is
+                written in the literature. LeadGraph turns publishing activity into ranked,
+                explainable, geo-mapped sales leads — with a weight tuner that re-ranks the whole
+                run live.
+              </p>
+              <p class="basis">My own product; a ground-up rewrite of a 23k-line Excel/VBA tool.</p>
+              <ul class="points">
+                <li>Every score decomposes into five named components, so a rep can disagree with a driver rather than the whole ranking</li>
+                <li>Communities, betweenness and PageRank computed in the browser over whichever edge set is displayed</li>
+                <li>Four distinct empty states — still running, still computing, genuinely empty, filtered out — that a careless build would conflate</li>
+              </ul>
+              <p class="stack">React 19 · TypeScript · deck.gl · three.js · graphology · TanStack Query</p>
+              <div class="actions">
+                <a class="btn btn-primary" href="https://demo-leadgraph.vercel.app">Open the demo <span class="arr">→</span></a>
+                <a class="btn btn-ghost" href="https://github.com/Neuralowkey/demo-leadgraph">Source</a>
+              </div>
             </div>
-            <p>
-              The back office of a school as one system: recruiting, donor and alumni pipelines
-              on a single contact record, students, seder attendance, giving history, a general
-              ledger synced from QuickBooks — and an approval queue where every action an AI
-              agent proposes waits for a human to accept or reject it.
-            </p>
-            <p class="basis">Based on a CRM I built for a yeshiva.</p>
-            <ul class="points">
-              <li>Agents propose, people decide: approving a stage move is the thing that moves the contact, and every decision appends to an audit trail</li>
-              <li>No confidence threshold above which an agent proceeds alone — the queue reports "auto-executed: 0" as a design fact, not a metric</li>
-              <li>The QuickBooks matcher refuses to guess: when it can't tell which gift a deposit belongs to it says why and hands the decision over</li>
-              <li>Mirrored accounts are excluded from the ledger totals, because counting both sides would double every dollar raised</li>
-            </ul>
-            <p class="stack">Next.js 16 · React 19 · TypeScript · Tailwind 4 · zustand</p>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://demo-yeshiva-os.vercel.app">Open the demo →</a>
-              <a class="btn btn-ghost" href="https://github.com/Neuralowkey/demo-yeshiva-os">Source</a>
+            <div class="visual" aria-hidden="true">
+              <svg viewBox="0 0 340 240" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <filter id="lgGlow" x="-80%" y="-80%" width="260%" height="260%">
+                    <feGaussianBlur stdDeviation="4" result="b" />
+                    <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                  </filter>
+                </defs>
+                <g class="lg-edge">
+                  <line x1="38" y1="96" x2="58" y2="168" />
+                  <line x1="58" y1="168" x2="150" y2="196" />
+                  <line x1="150" y1="196" x2="230" y2="206" />
+                  <line x1="230" y1="206" x2="258" y2="168" />
+                  <line x1="258" y1="168" x2="196" y2="142" />
+                  <line x1="126" y1="118" x2="96" y2="64" />
+                  <line x1="96" y1="64" x2="170" y2="52" />
+                  <line x1="170" y1="52" x2="258" y2="86" />
+                  <line x1="126" y1="118" x2="170" y2="52" />
+                  <line x1="196" y1="142" x2="258" y2="168" />
+                  <line x1="258" y1="86" x2="300" y2="128" />
+                  <line x1="258" y1="168" x2="300" y2="128" />
+                  <line x1="258" y1="86" x2="296" y2="52" />
+                  <line x1="96" y1="64" x2="60" y2="40" />
+                  <line x1="196" y1="142" x2="230" y2="206" />
+                </g>
+                <path class="lg-path" d="M58,168 L126,118 L196,142 L258,86" />
+                <g fill="#6ee7ff">
+                  <circle cx="38" cy="96" r="3" opacity="0.7" />
+                  <circle cx="58" cy="168" r="4.5" opacity="0.85" />
+                  <circle cx="126" cy="118" r="6" filter="url(#lgGlow)" />
+                  <circle cx="96" cy="64" r="3.5" opacity="0.7" />
+                  <circle cx="60" cy="40" r="2.5" opacity="0.55" />
+                  <circle cx="150" cy="196" r="3" opacity="0.6" />
+                </g>
+                <g fill="#a07cff">
+                  <circle cx="196" cy="142" r="5" opacity="0.9" />
+                  <circle cx="230" cy="206" r="3.5" opacity="0.7" />
+                  <circle cx="300" cy="128" r="5.5" filter="url(#lgGlow)" opacity="0.9" />
+                </g>
+                <g fill="#3df2b6">
+                  <circle class="lg-hot" cx="258" cy="86" r="8" filter="url(#lgGlow)" />
+                  <circle cx="170" cy="52" r="4" opacity="0.8" />
+                  <circle cx="296" cy="52" r="3" opacity="0.6" />
+                  <circle cx="258" cy="168" r="3.5" opacity="0.7" />
+                </g>
+              </svg>
+            </div>
+          </article>
+
+          <!-- 3 · Yeshiva OS -->
+          <article class="card accent-3" data-reveal>
+            <div>
+              <div class="card-top">
+                <span class="num">03</span>
+                <span class="tag tag-live">Live</span>
+                <span class="tag">Next.js 16</span>
+                <h2>Yeshiva Operating System</h2>
+              </div>
+              <p>
+                The back office of a school as one system: recruiting, donor and alumni pipelines
+                on a single contact record, students, seder attendance, giving history, a general
+                ledger synced from QuickBooks — and an approval queue where every action an AI
+                agent proposes waits for a human to accept or reject it.
+              </p>
+              <p class="basis">Based on a CRM I built for a yeshiva.</p>
+              <ul class="points">
+                <li>Agents propose, people decide: approving a stage move is the thing that moves the contact, and every decision appends to an audit trail</li>
+                <li>No confidence threshold above which an agent proceeds alone — the queue reports "auto-executed: 0" as a design fact, not a metric</li>
+                <li>The QuickBooks matcher refuses to guess: when it can't tell which gift a deposit belongs to it says why and hands the decision over</li>
+                <li>Mirrored accounts are excluded from the ledger totals, because counting both sides would double every dollar raised</li>
+              </ul>
+              <p class="stack">Next.js 16 · React 19 · TypeScript · Tailwind 4 · zustand</p>
+              <div class="actions">
+                <a class="btn btn-primary" href="https://demo-yeshiva-os.vercel.app">Open the demo <span class="arr">→</span></a>
+                <a class="btn btn-ghost" href="https://github.com/Neuralowkey/demo-yeshiva-os">Source</a>
+              </div>
+            </div>
+            <div class="visual" aria-hidden="true">
+              <svg viewBox="0 0 340 240" preserveAspectRatio="xMidYMid slice">
+                <g>
+                  <rect class="yo-row" x="42" y="34" width="256" height="44" rx="10" />
+                  <circle cx="66" cy="56" r="9" fill="rgba(238,242,248,0.09)" />
+                  <rect class="yo-line" x="86" y="47" width="104" height="7" rx="3.5" />
+                  <rect class="yo-line" x="86" y="60" width="66" height="6" rx="3" />
+                </g>
+                <g>
+                  <rect class="yo-row yo-row-active" x="42" y="96" width="256" height="48" rx="10" />
+                  <circle cx="66" cy="120" r="9" fill="rgba(183,196,122,0.22)" />
+                  <rect class="yo-line" x="86" y="110" width="118" height="7" rx="3.5" />
+                  <rect class="yo-line" x="86" y="123" width="82" height="6" rx="3" />
+                  <circle cx="272" cy="120" r="13" fill="none" stroke="rgba(183,196,122,0.45)" stroke-width="1.5" />
+                  <path class="yo-check" d="M265.5 120.5 l4.5 4.5 l9 -9.5" />
+                </g>
+                <g opacity="0.75">
+                  <rect class="yo-row" x="42" y="162" width="256" height="44" rx="10" />
+                  <circle cx="66" cy="184" r="9" fill="rgba(238,242,248,0.09)" />
+                  <rect class="yo-line" x="86" y="175" width="92" height="7" rx="3.5" />
+                  <rect class="yo-line" x="86" y="188" width="120" height="6" rx="3" />
+                </g>
+              </svg>
             </div>
           </article>
         </div>
 
-        <div class="note">
+        <div class="note" data-reveal>
           <strong>On the data.</strong> Every name, price, donation, student, customer, researcher
           and institution in these demos was invented for them. No client information — and no
           client's code history, branding, or configuration — is carried into any of these
@@ -252,5 +523,30 @@
         </p>
       </footer>
     </div>
+
+    <script>
+      // Scroll reveal. The hidden state is only ever applied from here, so with
+      // JS off (or reduced motion on) the page renders fully visible.
+      (function () {
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (!("IntersectionObserver" in window)) return;
+        var els = document.querySelectorAll("[data-reveal]");
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("revealed");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        els.forEach(function (el) {
+          el.classList.add("will-reveal");
+          io.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>
