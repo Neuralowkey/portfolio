@@ -287,7 +287,8 @@
 
       /* ── Language toggle ──────────────────────────────────────────────── */
       .lang {
-        position: fixed; top: 8px; inset-inline-start: 14px; z-index: 20;
+        /* Physical left always — never share the upper-right with .bh in RTL */
+        position: fixed; top: 8px; left: 14px; right: auto; z-index: 20;
         font: 600 12px/1 var(--sans); letter-spacing: 0.04em;
         color: var(--dim); background: color-mix(in srgb, var(--panel) 82%, transparent);
         border: 1px solid var(--edge-2); border-radius: 999px; padding: 7px 14px;
@@ -328,7 +329,8 @@
 
       /* ב״ה — quiet mark, top-right on every page */
       .bh {
-        position: fixed; top: 10px; inset-inline-end: 14px; z-index: 10;
+        /* Physical right always — must stay upper-right in Hebrew/RTL too */
+        position: fixed; top: 10px; right: 14px; left: auto; z-index: 10;
         font-size: 13px; color: var(--faint);
         pointer-events: none; user-select: none;
       }
@@ -352,8 +354,8 @@
             >For more than a decade I worked alongside biomedical research teams as their technical
             counterpart: discovery, demos, capital equipment closes and customer training. From 2024
             to 2026 I was on the other side of the table, as AI Operations Lead for a nonprofit. I
-            led its move to a production CRM and digital intake system that I built with agentic
-            coding tools, with </span
+            led its move to a CRM and digital intake system that I built with agentic coding tools
+            and that is running in production, with </span
           ><strong data-i18n="lede_em">an approval queue that keeps a human between AI agents and the database</strong
           ><span data-i18n="lede_b"
             >. Now I'm looking for AI deployment, field engineering and solutions architecture
@@ -373,9 +375,9 @@
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.63 13.63h-2.37V9.92c0-.89-.02-2.02-1.23-2.02-1.24 0-1.43.96-1.43 1.96v3.77H6.23V6h2.28v1.04h.03c.32-.6 1.09-1.23 2.25-1.23 2.4 0 2.85 1.58 2.85 3.64v4.18ZM3.56 4.95a1.38 1.38 0 1 1 0-2.75 1.38 1.38 0 0 1 0 2.75ZM4.75 13.63H2.37V6h2.38v7.63ZM14.82 0H1.18C.53 0 0 .52 0 1.16v13.68C0 15.48.53 16 1.18 16h13.63c.65 0 1.19-.52 1.19-1.16V1.16C16 .52 15.46 0 14.81 0Z"/></svg>
             LinkedIn
           </a>
-          <a href="mailto:colindolivier@gmail.com">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M.05 3.56A1.5 1.5 0 0 1 1.5 2.5h13a1.5 1.5 0 0 1 1.45 1.06L8 8.62.05 3.56ZM0 4.7v7.05L4.71 8.7 0 4.7Zm5.68 4.61L.34 12.9a1.5 1.5 0 0 0 1.16.6h13a1.5 1.5 0 0 0 1.16-.6l-5.34-3.59L8 10.38l-2.32-1.07ZM11.29 8.7 16 11.75V4.7l-4.71 4Z"/></svg>
-            colindolivier@gmail.com
+          <a href="https://www.linkedin.com/in/colinolivier">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.75 2.5A.75.75 0 0 1 2.5 1.75h11a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-.75.75H2.5a.75.75 0 0 1-.75-.75v-.5Zm0 4A.75.75 0 0 1 2.5 5.75h11a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-.75.75H2.5a.75.75 0 0 1-.75-.75v-.5Zm0 4A.75.75 0 0 1 2.5 9.75h7a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-.75.75h-7a.75.75 0 0 1-.75-.75v-.5Z"/></svg>
+            <span data-i18n="msg_me">Message me</span>
           </a>
         </nav>
       </header>
@@ -596,16 +598,17 @@
               <h3 data-i18n="m1_title">Rollout, not just the build</h3>
               <p data-i18n="m1_body">
                 As AI Operations Lead for a nonprofit (2024–2026), I led the organization's move to
-                modern operations software as a one-to-two-person team, shipping a production CRM and
-                digital intake: role-based access, safe data-migration importers, public intake forms,
-                lead-capture webhooks and UTM attribution, all feeding one system of record.
+                modern operations software as a one-to-two-person team. The CRM and digital intake I
+                built is running in production: role-based access, safe data-migration importers,
+                public intake forms, lead-capture webhooks and UTM attribution, all feeding one
+                system of record.
               </p>
             </div>
 
             <div class="map-item" data-reveal>
               <h3 data-i18n="m2_title">Agents, with a human in the loop</h3>
               <p data-i18n="m2_body">
-                In the CRM I built and rolled out, an audited approval queue kept a human between AI
+                In the CRM running in production, an audited approval queue keeps a human between AI
                 agents and the database. Alongside it I built LLM and agent prototypes on the Claude
                 and OpenAI APIs for ranking and monitoring workflows, with lightweight evaluation
                 checks. The Yeshiva OS demo above rebuilds the approval pattern on invented data.
@@ -650,7 +653,7 @@
         <p>
           <span data-i18n="footer_built">Built 2026 · updated November 2026</span> ·
           <a href="https://github.com/Neuralowkey">github.com/Neuralowkey</a> ·
-          <a href="mailto:colindolivier@gmail.com">colindolivier@gmail.com</a>
+          <a href="https://www.linkedin.com/in/colinolivier"><span data-i18n="msg_me">Message me</span></a>
         </p>
       </footer>
     </div>
@@ -671,9 +674,10 @@
           h1_em: "בונה",
           h1_b: " עם סוכני קוד מבוססי AI בכל יום.",
           lede_a:
-            "במשך יותר מעשור עבדתי לצד צוותי מחקר ביו-רפואי כאיש הקשר הטכני שלהם: בירור צרכים, הדגמות, סגירת עסקאות ציוד הון והדרכת לקוחות. בין 2024 ל-2026 עברתי לצד השני של השולחן, כראש תפעול AI בארגון ללא מטרות רווח. הובלתי את המעבר שלו למערכת CRM וקליטה דיגיטלית שבניתי והטמעתי בעצמי עם כלי קוד מבוססי סוכנים, עם ",
+            "במשך יותר מעשור עבדתי לצד צוותי מחקר ביו-רפואי כאיש הקשר הטכני שלהם: בירור צרכים, הדגמות, סגירת עסקאות ציוד הון והדרכת לקוחות. בין 2024 ל-2026 עברתי לצד השני של השולחן, כראש תפעול AI בארגון ללא מטרות רווח. הובלתי את המעבר שלו למערכת CRM וקליטה דיגיטלית שבניתי עם כלי קוד מבוססי סוכנים והיא רצה בייצור, עם ",
           lede_em: "תור אישורים שמציב אדם בין סוכני ה-AI לבין מסד הנתונים",
           lede_b: ". עכשיו אני מחפש תפקידים בהטמעת AI, בהנדסת שטח ובארכיטקטורת פתרונות.",
+          msg_me: "שלחו לי הודעה",
           facts:
             "רמת ישי · פתוח לכל הארץ ולעבודה מרחוק · אזרח ארה״ב וישראל · אנגלית שפת אם, עברית ברמת שיחה",
 
@@ -729,10 +733,10 @@
             "ההדגמות הן ההוכחה. זו העבודה שמאחוריהן, ולמה היא רלוונטית לליווי צוותי פיתוח בהטמעת כלי AI.",
           m1_title: "הטמעה, לא רק בנייה",
           m1_body:
-            "כראש תפעול AI בארגון ללא מטרות רווח (2024–2026) הובלתי את המעבר של הארגון לתוכנת תפעול מודרנית כצוות של אחד או שניים, ומסרתי מערכת CRM וקליטה דיגיטלית בסביבת ייצור: הרשאות לפי תפקיד, כלי ייבוא בטוחים להעברת נתונים, טופסי קליטה ציבוריים, webhooks ללכידת לידים וייחוס UTM — הכול מזין מקור אמת אחד.",
+            "כראש תפעול AI בארגון ללא מטרות רווח (2024–2026) הובלתי את המעבר של הארגון לתוכנת תפעול מודרנית כצוות של אחד או שניים. מערכת ה-CRM והקליטה הדיגיטלית שבניתי רצה בייצור: הרשאות לפי תפקיד, כלי ייבוא בטוחים להעברת נתונים, טופסי קליטה ציבוריים, webhooks ללכידת לידים וייחוס UTM — הכול מזין מקור אמת אחד.",
           m2_title: "סוכנים, עם אדם בלולאה",
           m2_body:
-            "במערכת ה-CRM שבניתי והטמעתי, תור אישורים מתועד הציב אדם בין סוכני ה-AI לבין מסד הנתונים. לצדו בניתי אבות-טיפוס של LLM וסוכנים על גבי ה-API של Claude ו-OpenAI לתהליכי דירוג וניטור, עם בדיקות הערכה קלות. הדגמת מערכת ההפעלה לישיבה למעלה משחזרת את דפוס האישורים על נתונים בדויים.",
+            "במערכת ה-CRM שרצה בייצור, תור אישורים מתועד מציב אדם בין סוכני ה-AI לבין מסד הנתונים. לצדו בניתי אבות-טיפוס של LLM וסוכנים על גבי ה-API של Claude ו-OpenAI לתהליכי דירוג וניטור, עם בדיקות הערכה קלות. הדגמת מערכת ההפעלה לישיבה למעלה משחזרת את דפוס האישורים על נתונים בדויים.",
           m3_title: "סוכני קוד הם שגרת העבודה היומית שלי",
           m3_body:
             "אני מתכנן את המערכת, כותב את המפרט, מנגנוני ההגנה וספרי ההפעלה, ואז מכוון סוכני קוד לבנות אותה — היום דרך Cursor (זרימות עבודה של סוכנים דרך Grok Bot; בעבר כמסגרת ל-Claude Code) ו-Claude Code — ובודק, מריץ ומפעיל את מה שהם מוסרים. כך אני יודע איפה סוכנים מאיצים צוות ואיפה הם צריכים גדרות.",
