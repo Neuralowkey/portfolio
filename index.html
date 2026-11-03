@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Colin David Olivier — working demos</title>
+    <title>Colin David Olivier — AI deployment &amp; working demos</title>
     <meta
       name="description"
-      content="Three working demos of systems I designed and shipped: a restaurant ordering and delivery system, a researcher lead-intelligence tool, and a yeshiva operating system. Open, click around, no signup."
+      content="Colin David Olivier, Ramat Yishai, Israel. A customer-facing technologist who builds with AI coding agents every day. Three working demos of systems I designed and shipped (a restaurant ordering and delivery system, a researcher lead-intelligence tool, a yeshiva operating system), and how the work maps to AI deployment, field engineering and solutions architecture."
     />
     <meta name="author" content="Colin David Olivier" />
     <meta name="color-scheme" content="dark" />
@@ -98,6 +98,7 @@
         max-width: 42em; margin: 0; text-wrap: pretty;
       }
       .lede strong { color: var(--ink); font-weight: 600; }
+      .facts { margin: 20px 0 0; font-size: 14px; color: var(--faint); letter-spacing: 0.01em; max-width: 46em; }
 
       .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
       .meta a {
@@ -260,6 +261,23 @@
       }
       .note strong { color: var(--ink); }
 
+      /* ── How this maps ────────────────────────────────────────────────────
+         Four quiet panels on the note's surface: the demos stay the loud
+         part of the page; this is the context behind them. */
+      .maps { margin-top: 72px; }
+      .map { display: grid; gap: 18px; }
+      @media (min-width: 760px) { .map { grid-template-columns: 1fr 1fr; } }
+      .map-item {
+        border: 1px solid var(--edge); border-radius: 16px;
+        background: var(--panel); padding: 24px 26px;
+      }
+      .map-item h3 {
+        font-family: var(--display); font-size: 21px; font-weight: 520;
+        line-height: 1.2; letter-spacing: -0.005em; margin: 0;
+      }
+      .map-item p { color: var(--dim); font-size: 14.5px; margin: 12px 0 0; text-wrap: pretty; }
+      .map-item a { color: var(--ink); text-underline-offset: 3px; }
+
       footer {
         margin-top: 72px; border-top: 1px solid var(--edge);
         padding: 30px 0 80px; color: var(--faint); font-size: 14px;
@@ -291,6 +309,7 @@
       /* Hebrew sets denser than Latin at display sizes; give it back the air. */
       [dir="rtl"] h1 { line-height: 1.18; letter-spacing: 0; }
       [dir="rtl"] .card h2 { line-height: 1.3; }
+      [dir="rtl"] .map-item h3 { line-height: 1.35; letter-spacing: 0; }
       /* Stack lists are Latin-script product names; they read left-to-right in
          either language. Keep the run LTR, but align it to the RTL edge. */
       [dir="rtl"] .stack { direction: ltr; text-align: right; }
@@ -325,18 +344,25 @@
       <header>
         <p class="kicker" data-i18n="kicker">Colin David Olivier</p>
         <h1>
-          <span data-i18n="h1_a">Three systems, </span><em data-i18n="h1_em">running</em
-          ><span data-i18n="h1_b">, that you can click through right now.</span>
+          <span data-i18n="h1_a">I help technical teams adopt new tools — and I </span><em data-i18n="h1_em">build</em
+          ><span data-i18n="h1_b"> with AI coding agents every day.</span>
         </h1>
         <p class="lede">
           <span data-i18n="lede_a"
-            >I design systems, specify them tightly, and direct AI coding agents to build them —
-            then review and stress-test what they ship. These are demos of three I built for real
-            clients, rebuilt with </span
-          ><strong data-i18n="lede_em">invented data</strong
-          ><span data-i18n="lede_b">
-            so you can look around without anyone's information being involved.</span
+            >For more than a decade I worked alongside biomedical research teams as their technical
+            counterpart: discovery, demos, capital equipment closes and customer training. From 2024
+            to 2026 I was on the other side of the table, as AI Operations Lead for a nonprofit. I
+            led its move to a production CRM and digital intake system that I built with agentic
+            coding tools, with </span
+          ><strong data-i18n="lede_em">an approval queue that keeps a human between AI agents and the database</strong
+          ><span data-i18n="lede_b"
+            >. Now I'm looking for AI deployment, field engineering and solutions architecture
+            roles.</span
           >
+        </p>
+        <p class="facts" data-i18n="facts">
+          Ramat Yishai, Israel · open across Israel and remote · US &amp; Israeli citizen · native
+          English, conversational Hebrew
         </p>
         <nav class="meta" aria-label="Contact links">
           <a href="https://github.com/Neuralowkey">
@@ -359,8 +385,9 @@
           <p class="section-label" data-i18n="section_label">The demos</p>
         </div>
         <p class="section-note" data-i18n="section_note">
-          No signup, no install, nothing to configure. Each one opens straight into the product
-          and carries a banner explaining exactly what is real and what is stubbed.
+          Three systems I designed and shipped, rebuilt on invented data. No signup, no install,
+          nothing to configure: each one opens straight into the product and carries a banner
+          explaining exactly what is real and what is stubbed.
         </p>
 
         <div class="cards">
@@ -554,15 +581,75 @@
             plainly and names the seam.</span
           >
         </div>
+
+        <section class="maps" aria-labelledby="maps-label">
+          <div class="section-head">
+            <p class="section-label" id="maps-label" data-i18n="map_label">How this maps to AI deployment</p>
+          </div>
+          <p class="section-note" data-i18n="map_note">
+            The demos are the proof. This is the work behind them, and why it carries over to helping
+            engineering teams roll out AI tools.
+          </p>
+
+          <div class="map">
+            <div class="map-item" data-reveal>
+              <h3 data-i18n="m1_title">Rollout, not just the build</h3>
+              <p data-i18n="m1_body">
+                As AI Operations Lead for a nonprofit (2024–2026), I led the organization's move to
+                modern operations software as a one-to-two-person team, shipping a production CRM and
+                digital intake: role-based access, safe data-migration importers, public intake forms,
+                lead-capture webhooks and UTM attribution, all feeding one system of record.
+              </p>
+            </div>
+
+            <div class="map-item" data-reveal>
+              <h3 data-i18n="m2_title">Agents, with a human in the loop</h3>
+              <p data-i18n="m2_body">
+                In production, an audited approval queue keeps a human between AI agents and the
+                database. Alongside it I built LLM and agent prototypes on the Claude and OpenAI APIs
+                for ranking and monitoring workflows, with lightweight evaluation checks. The Yeshiva
+                OS demo above rebuilds the approval pattern on invented data.
+              </p>
+            </div>
+
+            <div class="map-item" data-reveal>
+              <h3 data-i18n="m3_title">Coding agents are my daily workflow</h3>
+              <p data-i18n="m3_body">
+                I design the system, write the specs, guardrails and runbooks, then direct AI coding
+                agents such as Claude Code to build it, and I review, test and run what they ship.
+                That is how I know where agents speed a team up and where they need guardrails.
+              </p>
+              <p>
+                <span data-i18n="m3_mc_a">For example, </span
+                ><a href="https://github.com/Neuralowkey/mission-control">Mission Control</a
+                ><span data-i18n="m3_mc_b"
+                  >, my agentic job-search pipeline: an agent sweeps a dozen job boards twice a week,
+                  scores every role against a rubric that learns from my feedback, and keeps the best
+                  openings in a human-in-the-loop dashboard with tailored materials.</span
+                >
+              </p>
+            </div>
+
+            <div class="map-item" data-reveal>
+              <h3 data-i18n="m4_title">Between the customer and the product</h3>
+              <p data-i18n="m4_body">
+                Before this, I owned technical discovery, demos, capital equipment closes and customer
+                training in life-science R&amp;D: physiology data acquisition at ADInstruments
+                (including a Training and Support Engineer role), digital pathology AI at Visiopharm,
+                and neural interfaces at NeuroNexus. That is the part of the job where you stand next
+                to the scientist, make the tool do what they need, and translate between the lab and
+                the product team. I started out in a behavioral neuroscience lab at CU Boulder.
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer>
         <p>
-          <span data-i18n="footer_built">Built 2026</span> ·
+          <span data-i18n="footer_built">Built 2026 · updated November 2026</span> ·
           <a href="https://github.com/Neuralowkey">github.com/Neuralowkey</a> ·
-          <span data-i18n="footer_seealso">See also</span>
-          <a href="https://github.com/Neuralowkey/mission-control">Mission Control</a
-          ><span data-i18n="footer_mc">, an agentic pipeline that runs my job search.</span>
+          <a href="mailto:colindolivier@gmail.com">colindolivier@gmail.com</a>
         </p>
       </footer>
     </div>
@@ -579,17 +666,19 @@
       (function () {
         var HE = {
           kicker: "קולין דוד אוליבייה",
-          h1_a: "שלוש מערכות, ",
-          h1_em: "פועלות",
-          h1_b: ", שאפשר להיכנס אליהן עכשיו.",
+          h1_a: "אני עוזר לצוותים טכניים לאמץ כלים חדשים — ואני ",
+          h1_em: "בונה",
+          h1_b: " עם סוכני קוד מבוססי AI בכל יום.",
           lede_a:
-            "אני מתכנן מערכות, כותב להן מפרט הדוק, ומכוון סוכני AI שיכתבו את הקוד — ואז בודק ומקשה על מה שהם מוסרים. אלה הדגמות של שלוש מערכות שבניתי עבור לקוחות אמיתיים, שנבנו מחדש עם ",
-          lede_em: "נתונים בדויים",
-          lede_b: " כדי שתוכלו להתרשם בלי שהמידע של אף אחד מעורב.",
+            "במשך יותר מעשור עבדתי לצד צוותי מחקר ביו-רפואי כאיש הקשר הטכני שלהם: בירור צרכים, הדגמות, סגירת עסקאות ציוד הון והדרכת לקוחות. בין 2024 ל-2026 עברתי לצד השני של השולחן, כראש תפעול AI בארגון ללא מטרות רווח. הובלתי את המעבר שלו למערכת CRM וקליטה דיגיטלית שרצה בסביבת ייצור, שבניתי בעצמי עם כלי קוד מבוססי סוכנים, עם ",
+          lede_em: "תור אישורים שמציב אדם בין סוכני ה-AI לבין מסד הנתונים",
+          lede_b: ". עכשיו אני מחפש תפקידים בהטמעת AI, בהנדסת שטח ובארכיטקטורת פתרונות.",
+          facts:
+            "רמת ישי · פתוח לכל הארץ ולעבודה מרחוק · אזרח ארה״ב וישראל · אנגלית שפת אם, עברית ברמת שיחה",
 
           section_label: "ההדגמות",
           section_note:
-            "בלי הרשמה, בלי התקנה, בלי הגדרות. כל אחת נפתחת ישר לתוך המוצר ונושאת באנר שמסביר בדיוק מה אמיתי ומה מדומה.",
+            "שלוש מערכות שתכננתי ומסרתי, שנבנו מחדש על נתונים בדויים. בלי הרשמה, בלי התקנה, בלי הגדרות: כל אחת נפתחת ישר לתוך המוצר ונושאת באנר שמסביר בדיוק מה אמיתי ומה מדומה.",
 
           tag_live: "פעיל",
           cta_open: "לפתיחת ההדגמה",
@@ -634,14 +723,31 @@
           note_body:
             "כל שם, מחיר, תרומה, תלמיד, לקוח, חוקר ומוסד בהדגמות האלה הומצאו עבורן. שום מידע של לקוח — ושום היסטוריית קוד, מיתוג או תצורה של לקוח — לא הועבר לאף אחד מהמאגרים האלה. במקום שבו הדגמה מדמה רכיב (מסד נתונים, התחברות, סולק תשלומים), קובץ ה-README שלה אומר זאת במפורש ומציין את נקודת החיבור.",
 
-          footer_built: "נבנה 2026",
-          footer_seealso: "ראו גם",
-          footer_mc: ", צינור סוכנים שמנהל את חיפוש העבודה שלי."
+          map_label: "איך זה מתחבר להטמעת AI",
+          map_note:
+            "ההדגמות הן ההוכחה. זו העבודה שמאחוריהן, ולמה היא רלוונטית לליווי צוותי פיתוח בהטמעת כלי AI.",
+          m1_title: "הטמעה, לא רק בנייה",
+          m1_body:
+            "כראש תפעול AI בארגון ללא מטרות רווח (2024–2026) הובלתי את המעבר של הארגון לתוכנת תפעול מודרנית כצוות של אחד או שניים, ומסרתי מערכת CRM וקליטה דיגיטלית בסביבת ייצור: הרשאות לפי תפקיד, כלי ייבוא בטוחים להעברת נתונים, טופסי קליטה ציבוריים, webhooks ללכידת לידים וייחוס UTM — הכול מזין מקור אמת אחד.",
+          m2_title: "סוכנים, עם אדם בלולאה",
+          m2_body:
+            "בסביבת הייצור, תור אישורים מתועד מציב אדם בין סוכני ה-AI לבין מסד הנתונים. לצדו בניתי אבות-טיפוס של LLM וסוכנים על גבי ה-API של Claude ו-OpenAI לתהליכי דירוג וניטור, עם בדיקות הערכה קלות. הדגמת מערכת ההפעלה לישיבה למעלה משחזרת את דפוס האישורים על נתונים בדויים.",
+          m3_title: "סוכני קוד הם שגרת העבודה היומית שלי",
+          m3_body:
+            "אני מתכנן את המערכת, כותב את המפרט, מנגנוני ההגנה וספרי ההפעלה, ואז מכוון סוכני קוד כמו Claude Code לבנות אותה — ובודק, מריץ ומפעיל את מה שהם מוסרים. כך אני יודע איפה סוכנים מאיצים צוות ואיפה הם צריכים גדרות.",
+          m3_mc_a: "לדוגמה, ",
+          m3_mc_b:
+            ", צינור הסוכנים שמנהל את חיפוש העבודה שלי: סוכן סורק תריסר לוחות משרות פעמיים בשבוע, מדרג כל משרה מול מחוון שלומד מהמשוב שלי, ומחזיק את ההזדמנויות הטובות ביותר בלוח בקרה עם אדם בלולאה וחומרים מותאמים.",
+          m4_title: "בין הלקוח למוצר",
+          m4_body:
+            "לפני כן הייתי אחראי על בירור צרכים טכני, הדגמות, סגירת עסקאות ציוד הון והדרכת לקוחות במחקר ופיתוח במדעי החיים: רכישת נתונים פיזיולוגיים ב-ADInstruments (כולל תפקיד מהנדס הדרכה ותמיכה), בינה מלאכותית לפתולוגיה דיגיטלית ב-Visiopharm, וממשקים עצביים ב-NeuroNexus. זה החלק בעבודה שבו עומדים ליד המדען, גורמים לכלי לעשות את מה שהוא צריך, ומתרגמים בין המעבדה לצוות המוצר. התחלתי במעבדה למדעי המוח ההתנהגותיים באוניברסיטת קולורדו בבולדר.",
+
+          footer_built: "נבנה ב-2026 · עודכן בנובמבר 2026"
         };
 
         var TITLE = {
-          en: "Colin David Olivier — working demos",
-          he: "קולין דוד אוליבייה — הדגמות עובדות"
+          en: "Colin David Olivier — AI deployment & working demos",
+          he: "קולין דוד אוליבייה — הטמעת AI והדגמות עובדות"
         };
 
         var KEY = "colinolivier.lang";
