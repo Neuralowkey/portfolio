@@ -14,8 +14,8 @@ solutions architecture. Ramat Yishai, Israel; open across Israel and remote.
 | LeadGraph — researcher lead intelligence | [open](https://demo-leadgraph.vercel.app) | [repo](https://github.com/Neuralowkey/demo-leadgraph) |
 | Yeshiva Operating System | [open](https://demo-yeshiva-os.vercel.app) | [repo](https://github.com/Neuralowkey/demo-yeshiva-os) |
 
-Also public: [Mission Control](https://github.com/Neuralowkey/mission-control), the agentic
-pipeline that runs my job search.
+Also public: [Mission Control](https://github.com/Neuralowkey/mission-control), a scheduled
+agentic pipeline for my job search.
 
 Every demo runs on invented data. No client information, code history, branding or
 configuration is carried into any of these repositories.
